@@ -52,16 +52,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['profile']='home/profile';
-$route['phpValidation']='home/validate';
-$route['upload']='firebase/upload';
-$route['download']='firebase/download';
-$route['downloadJson']='firebase/downloadJson';
-$route['downloadJsonUsingPhp']='firebase/downloadJsonUsingPhp';
-
-$route['firebase']='firebase';
-$route['read-db']='firebase/readDB';
-$route['write-db']='firebase/writeDB';
-$route['ty/customer_contacts/cachePolicy']='firebase/downloadJsonUsingPhp1';
-
-$route['((?!(bus-tickets))[\w\W][^/])*-bus-tickets']   = 'home';

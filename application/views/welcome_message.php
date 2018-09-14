@@ -66,11 +66,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</style>
 </head>
 <body>
-<div id="tywidget" data-wid="ZAHMAKHAHAYYAGVHZXIIKV" data-layout="1" data-user="ZAHMAKHAHAYYAZJHZXIIKJ"></div><script src="http://affiliates.travelyaari.com/public/js/jquery-1.8.3.min.js"></script><script type="text/javascript">(function(){var e=document.createElement("script");e.setAttribute("src","http://affiliates.travelyaari.com/widget/widgetjs" );e.setAttribute("type","text/javascript");e.setAttribute("async",true);var t=document.getElementsByTagName("head")[0].appendChild(e)})()</script>
-
-
-
-<div id="tywidget" style="display: none" data-wid="ZAHMAKHAHAYYAGVHZXIIKV" data-layout="1" data-user="ZAHMAKHAHAYYAZJHZXIIKJ"></div><script src="http://affiliates.travelyaari.com/public/js/jquery-1.8.3.min.js"></script><script type="text/javascript">(function(){var e=document.createElement("script");e.setAttribute("src","http://affiliates.travelyaari.com/widget/widgetjs" );e.setAttribute("type","text/javascript");e.setAttribute("async",true);var t=document.getElementsByTagName("head")[0].appendChild(e)})()</script>
 
 <div id="container">
 	<h1>Welcome to CodeIgniter!</h1>

@@ -495,68 +495,6 @@ class CI_Loader {
 		return $this->_ci_load(array('_ci_view' => $view, '_ci_vars' => $this->_ci_prepare_view_vars($vars), '_ci_return' => $return));
 	}
 
-	function myview1($folder, $view, $vars = array(), $return = FALSE) {
-		//echo base_url();
-		$fileName = $folder.'/'.$view;
-		//echo $fileName;
-		//exit();
-		//echo $view.'<br>';
-		//echo var_dump($vars).'<br>';
-		//echo $return.'<br>';
-		//exit();
-        
-		if(is_file($fileName)) 
-		{
-				//echo 'run';
-				//echo '<br>'.$fileName;
-				//exit();
-				
-
-				if (method_exists($this, '_ci_object_to_array'))
-
-                 {
-                 	echo 'runn ';
-		            exit();
-              		return $this->_ci_load(array('_ci_path' => $fileName, '_ci_view' => $view, '_ci_vars' => $this->_ci_object_to_array($vars), '_ci_return' => $return));  
-
-                 } else {
-                 	echo 'run';
-		          exit();
-              		return $this->_ci_load(array('_ci_path' => $fileName,'_ci_view' => $view, '_ci_vars' => $this->_ci_prepare_view_vars($vars), '_ci_return' => $return));
-                      }
-		}  // Get from theme
-
-		return $this->view($view, $vars, $return);        
-	}	
-
-	function myview($folder, $view, $vars = array(), $return = FALSE) {
-
-		$fileName = $folder.'/'.$view;
-		if(file_exists($fileName)) 
-		{
-				return $this->_ci_load(array('_ci_path' => $fileName, '_ci_view' => $view, '_ci_vars' => $this->_ci_object_to_array($vars), '_ci_return' => $return));  
-		}  // Get from theme
-        return $this->view($view, $vars, $return);        
-	}	
- 
-// --------------------------------------------------------------------
-
-	/**
-	 * Object to Array
-	 *
-	 * Takes an object as input and converts the class variables to array key/vals
-	 *
-	 * @access	private
-	 * @param	object
-	 * @return	array
-	 */
-	function _ci_object_to_array($object)
-	{
-		return (is_object($object)) ? get_object_vars($object) : $object;
-	}
-
-	// --------------------------------------------------------------------
-
 	// --------------------------------------------------------------------
 
 	/**
@@ -1023,8 +961,7 @@ class CI_Loader {
 		// to standard PHP echo statements.
 		if ( ! is_php('5.4') && ! ini_get('short_open_tag') && config_item('rewrite_short_tags') === TRUE)
 		{
-			echo eval('?>'.preg_replace('/;*\s*\?>/', '; ?>', str_replace('
-				<?=', '<?php echo ', file_get_contents($_ci_path))));
+			echo eval('?>'.preg_replace('/;*\s*\?>/', '; ?>', str_replace('<?=', '<?php echo ', file_get_contents($_ci_path))));
 		}
 		else
 		{
@@ -1059,7 +996,7 @@ class CI_Loader {
 			$_ci_CI->output->append_output(ob_get_contents());
 			@ob_end_clean();
 		}
-		
+
 		return $this;
 	}
 
@@ -1476,4 +1413,3 @@ class CI_Loader {
 		return $CI->$component;
 	}
 }
-    
