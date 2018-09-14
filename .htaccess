@@ -1,6 +1,14 @@
-DirectoryIndex index.php
-RewriteEngine on                       
-RewriteCond $1 !^(index\.php|(.*)\.swf|forums|images|css|downloads|js|robots\.txt|favicon\.ico)
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /Developer439.github.io/
+
+RewriteCond %{REQUEST_URI} ^system.*
+RewriteRule ^(.*)$ /index.php?/$1 [L]
+
+RewriteCond %{REQUEST_URI} ^application.*
+RewriteRule ^(.*)$ /index.php?/$1 [L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ ./index.php?$1 [L,QSA] 
+RewriteRule ^(.*)$ index.php?/$1 [L]
+</IfModule>
