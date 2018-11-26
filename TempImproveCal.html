@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Calculator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    .button:hover {
+      background-color: rgb(223, 210, 214);
+      color: rgb(31, 27, 25);
+    }
+
+    .button:active {
+      background-color: rgb(223, 210, 214);
+    }
+
+    .buttonspl:hover {
+      background-color:cornflowerblue;
+      color: black;
+    }
+
+    .buttonspl:active {
+      background-color:rgb(16, 65, 155);
+      color: red;
+
+    }
+
+    .recy:hover {
+      background-color: rgb(223, 210, 214);
+    }
+
+    .recy :active {
+      color: red;
+    }
+
+    .hist1:hover {
+      background-color: gainsboro;
+      color: black;
+    }
+
+    .hist1:active {
+      background-color: rgba(128, 128, 128, 0.438);
+      color: rgb(212, 30, 151);
+
+    }
+
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      background-color: #eaeafa;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .sidenav a:hover {
+      background-color: #eee8de;
+    }
+
+    .sidenav a:active {
+      background-color: #8cf5f8;
+    }
+
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 15px;
+      font-size: 36px;
+
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav {
+        padding-top: 15px;
+      }
+      .sidenav a {
+        font-size: 18px;
+      }
+    }
+
+    .button1 {
+      border: none;
+      outline-color: gainsboro;
+      border-color: darkgray;
+      background-color: lightgrey;
+      font-size: inherit;
+      display: -webkit-inline-box;
+      width: fit-content;
+
+
+
+
+      outline: lightgrey;
+      cursor: default;
+      ;
+      border: none;
+    }
+
+    .button1:active,
+    :visited {
+      border-bottom: 4px;
+      border-bottom-color: blue;
+      text-decoration-line: none;
+
+      border-bottom-style: solid;
+    }
+
+    .flex-container {
+      display: flex;
+      flex-direction: row;
+      background-color: lightgrey;
+
+    }
+
+    .flex-container>div {
+      background-color: lightgrey;
+      width: 100%;
+      height: 100%;
+      margin: 1px;
+      text-align: center;
+      line-height: 40px;
+      font-size: 25px;
+    }
+
+    .flex-container1 {
+      display: flex;
+      flex-direction: row;
+      background-color: lightgrey;
+
+    }
+
+    .flex-container1>div {
+      background-color: lightgrey;
+      width: 100%;
+      margin: 1px;
+      text-align: left;
+      line-height: 50px;
+      font-size: 25px;
+    }
+
+    .num {
+      background-color: #fbfbfb;
+      outline: lightgrey;
+      color: white;
+      height: 82px;
+      width: 187px;
+      padding: 15px 40px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 20px;
+      color: black;
+      margin-left: -9px;
+      margin-right: 10px;
+      cursor: default;
+      ;
+      border: none;
+    }
+
+    .button {
+      background-color: lightwhite;
+
+      outline: lightgrey;
+      color: white;
+      height: 82px;
+      /*width:187px; */
+      width: 14vw;
+      padding: 15px 40px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 20px;
+      color: black;
+      margin-left: -9px;
+      margin-right: 10px;
+      cursor: default;
+      ;
+      border: none;
+    }
+
+    body {
+      background-color: lightgrey;
+    }
+  </style>
+</head>
+
+<body style="margin-bottom:-12px;border-bottom:-12px;margin-top:-12px;border-top:-12px">
+  <p style="margin-bottom:1px;line-height:10px">Calculator</p>
+  <script>
+    'use strict';
+
+    document.addEventListener('keypress', (event) => {
+      const val = event.key;
+      if (event.keyCode === 8 && document.activeElement !== 'text') {
+        event.preventDefault();
+        //alert('Prevent page from going back');
+        //if(val=="Backspace")
+        del();
+        return false;
+      }
+      if (event.keyCode === 13 && document.activeElement !== 'text') {
+        event.preventDefault();
+        enterr();
+        return false;
+
+      }
+
+
+      if (!isNaN(val))
+        v(val);
+      else {
+        if (val == "=")
+          e();
+        if (val == "%")
+          c("%");
+        if (val == "/" || "+" || "*" || "-")
+          c(val);
+
+      }
+    });
+    window.addEventListener("keydown", function (e) {
+      // /*keyCode: 8
+      // keyIdentifier: "U+0008"
+      // */ 
+      if (e.keyCode === 8 && document.activeElement !== 'text') {
+        e.preventDefault();
+        //alert('Prevent page from going back');
+        //if(val=="Backspace")
+        del();
+      }
+      /*   if(e.keyCode===13&&document.activeElement!=='text')
+         {
+           e.preventDefault();
+           enterr();
+         } */
+
+    });
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+
+  </script>
+  <div class="flex-container1">
+    <div style="width:72.5%">
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Standard</a>
+        <a href="#">Scientific</a>
+        <a href="#">Programmer</a>
+        <a href="#">DataCalculation</a>
+
+      </div>
+      <span style="font-size:25px;cursor:pointer" onclick="openNav()">&#9776;Standard</span>
+    </div>
+    <div style="width:27.5%">
+      <span>
+        <input class="button1" type="button" value="History" onclick='Hiss()'>
+      </span>
+      <span>
+        <input class="button1" type="button" value="Memory" onclick='Mem()'>
+      </span>
+    </div>
+  </div>
+  <div class="flex-container">
+    <div style="width:72.5%">
+      <table>
+        <tr>
+          <!--<td colspan="5"><input id="valueshow" type="text" readonly value="0" style="border:none; height:100px; width:950px; background-color:lightgrey; color:black; text-align:right; font-size:100%"/></td>
+</tr>  -->
+
+          <span>
+            <input id="valueshowed" type="text" readonly value="" style="border:none ; height:39px; width:100%; background-color:lightgrey; color:darkgrey; text-align-last:right; font-size:100%"
+            />
+          </span>
+          <br>
+          <span>
+            <input id="valueshow" type="text" readonly onkeypress="mykey(e)" value="0" style="border:none ; height:70px; width:69.1vw; background-color:lightgrey; color:black; text-align-last:right; font-size:200%"
+            />
+            <br>
+          </span>
+        </tr>
+        <tr>
+          <td>
+            <input class="button" type="button" value="%" onclick='c("%")' />
+            <td>
+              <input class="button" type="button" value="CE" onclick='ce()' />
+              <td>
+                <input class="button" type="button" value="C" onclick='clearr()' />
+                <td>
+                  <input class="button" type="button" value="⌫" onclick='del()' />
+                  <td>
+                    <input class="button buttonspl buttonn" type="button" value="÷" onclick='c("/")' />
+        </tr>
+        <tr>
+          <td>
+            <input class="button" type="button" value="√" onclick='sqrrt()' />
+            <td>
+              <input class="button num" type="button" value="7" onclick='v("7")' />
+              <td>
+                <input class="button num" type="button" value="8" onclick='v("8")' />
+                <td>
+                  <input class="button num" type="button" value="9" onclick='v("9")' />
+                  <td>
+                    <input class="button buttonspl" type="button" value="x" onclick='c("*")' />
+        </tr>
+        <tr>
+          <td>
+            <input class="button" type="button" value="x²" onclick='sqr()' />
+            <td>
+              <input class="button num" type="button" value="4" onclick='v("4")' />
+              <td>
+                <input class="button num" type="button" value="5" onclick='v("5")' />
+                <td>
+                  <input class="button num" type="button" value="6" onclick='v("6")' />
+                  <td>
+                    <input class="button buttonspl" type="button" value="-" onclick='c("-")' />
+        </tr>
+        <tr>
+          <td>
+            <input class="button" type="button" value="x³" onclick='cub()' />
+            <td>
+              <input class="button num" type="button" value="1" onclick='v("1")' />
+              <td>
+                <input class="button num" type="button" value="2" onclick='v("2")' />
+                <td>
+                  <input class="button num" type="button" value="3" onclick='v("3")' />
+                  <td>
+                    <input class="button buttonspl" type="button" value="+" onclick='c("+")' />
+        </tr>
+        <tr>
+          <td>
+            <input class="button" type="button" value="1/x" onclick='oneBy()' />
+            <td>
+              <input class="button" type="button" value="±" onclick='pn()' />
+              <td>
+                <input class="button num" type="button" value="0" onclick='v("0")' />
+                <td>
+                  <input class="button" type="button" value="•" onclick='dot(".")' />
+                  <td>
+                    <input class="button buttonspl" type="button" value="=" onclick="e()" />
+        </tr>
+      </table>
+    </div>
+    <div style="width:27.5%">
+      <div id="his" title="click to view or rightclick to remove an entry">
+        <span id="memo" style="visibility:collapse;text-align:center;font-size:20px;color:red">
+          <b>There is nothing saved in Memory</b>
+        </span>
+        <!-- <span  id="memo1" style="visibility:collapse;text-align:center;font-size:20px;color:rgb(255, 0, 140)"><b>There is no History Yet</b></span>    
+     -->
+      </div>
+      <button class="recy" id="bin" onclick="allclear()" style="visibility:hidden;font-size:24px ;bottom:10px ;right:10px;position:fixed;outline:none;border:mediumturquoise">
+        <i title="clear all history" class="fa">&#xf014;</i>
+      </button>
+    </div>
+    <script>
+      var his = [];
+      var i = 0;
+      function mykey(e) {
+        console.log(e.keyCode);
+      }
+      function dot() {
+        var temp = parseInt(document.getElementById("valueshow").value);
+        document.getElementById("valueshow").value = temp + "."
+      }
+      function del() {
+
+        var value = document.getElementById("valueshow").value;
+        if (value !== "0" && value.length > 1)
+          document.getElementById("valueshow").value = value.substr(0, value.length - 1);
+        else {
+
+          //alert("mam u came to me ...ohoooo");
+          document.getElementById("valueshow").value = "0";
+          //alert("u did change to zero MR.Perfect");
+          
+        }
+      }
+      function sqr() {
+        var temp = parseFloat(document.getElementById("valueshow").value);
+        document.getElementById("valueshowed").value = "(" + (temp) + ")²";
+        document.getElementById("valueshow").value = roundToTwo(Math.pow(temp, 2));
+        his[i] = document.getElementById("valueshowed").value + "=" + document.getElementById("valueshow").value;
+        i++;
+        //document.getElementById("his").innerHTML="";
+        //his.forEach(History);
+        flag = 3;
+        Historyy(his[i - 1]);
+        ch1=true;
+      }
+      function cub() {
+        var temp = parseFloat(document.getElementById("valueshow").value);
+        document.getElementById("valueshowed").value = "(" + (temp) + ")³";
+        document.getElementById("valueshow").value = roundToTwo(Math.pow(temp, 3));
+        his[i] = document.getElementById("valueshowed").value + "=" + document.getElementById("valueshow").value;
+        i++;
+        //document.getElementById("his").innerHTML="";
+        //his.forEach(History);
+        flag = 3;
+        Historyy(his[i - 1]);
+        ch1=true;
+      }
+      function oneBy() {
+        var temp = parseFloat(document.getElementById("valueshow").value);
+        document.getElementById("valueshowed").value = "1/(" + (temp) + ")";
+        document.getElementById("valueshow").value = roundToTwo(Math.pow(temp, -1));
+        his[i] = document.getElementById("valueshowed").value + "=" + document.getElementById("valueshow").value;
+        i++;
+        //documecalnt.getElementById("his").innerHTML="";
+        //his.forEach(History);
+        flag = 3;
+        Historyy(his[i - 1]);
+        ch1=true;
+      }
+      function clearr() {
+        // alert("MAMA IT WORKS FINE");
+        document.getElementById("valueshow").value = "0";
+        document.getElementById("valueshowed").value = "";
+        
+      }
+      function pn() {
+         
+        document.getElementById("valueshow").value = roundToTwo(0 - document.getElementById("valueshow").value);
+        //his[i] = document.getElementById("valueshowed").value + "=" + document.getElementById("valueshow").value;
+        //i++;
+        //document.getElementById("his").innerHTML="";
+        //his.forEach(History);
+       // flag = 2;
+        //Historyy(his[i - 1]);
+        ch1=true;
+      }
+      function sqrrt() {
+        // alert("RUN");
+        var temp = parseFloat(document.getElementById("valueshow").value);
+        document.getElementById("valueshowed").value = "√(" + (temp) + ")";
+        document.getElementById("valueshow").value = roundToTwo((Math.sqrt(document.getElementById("valueshow").value)));
+        his[i] = document.getElementById("valueshowed").value + "=" + document.getElementById("valueshow").value;
+        i++;
+        //document.getElementById("his").innerHTML="";
+        //his.forEach(History);
+        flag = 3;
+        ch1=true;
+        
+        Historyy(his[i - 1]);
+      }
+      function c(val) {
+       // document.getElementById("valueshowed").value = "";
+       if(ch==true)
+       {
+        console.log("else if in c()");
+        document.getElementById("valueshowed").value = document.getElementById("valueshowed").value + val;
+        
+        ch=false;
+       }
+       else if((ch==false&&ch1==true))
+       {
+           console.log("else if in c()");
+           document.getElementById('valueshowed').value=document.getElementById("valueshow").value + val;
+           ch1=false;
+           ch=true;
+       }
+       else {
+        console.log("else  c()");
+        document.getElementById("valueshowed").value += document.getElementById("valueshow").value + val;
+        document.getElementById("valueshow").value = "0";}
+        ch=true;
+      }
+      var ch=false,ch1=false;;
+      function v(val) {
+        //alert("stupid u r calling me by this value"+val);
+        if(ch==true){
+            console.log('if in v()');
+          //  document.getElementById("valueshowed").value=document.getElementById("valueshow").value;
+        document.getElementById("valueshow").value=val;
+        
+        ch1=false;
+        ch=false;
+        }
+        else if((ch==false&&ch1==true))
+       {
+           console.log("else if in v()");
+           document.getElementById('valueshowed').value="";
+           document.getElementById("valueshow").value=val;
+           ch1=false;
+       }
+        else{
+            console.log('else in v()');
+        document.getElementById("valueshow").value += val;
+        //alert(document.getElementById("valueshow").value);
+        document.getElementById("valueshow").value =+ document.getElementById("valueshow").value;
+           }   
+      }
+      function ce() {
+        document.getElementById("valueshow").value = 1 - 1;
+        // alert(document.getElementById("valueshow").value);
+        //alert(document.getElementById("valueshowed").value);
+        //document.getElementById("valueshowed").value="";
+      }
+      function roundToTwo(num) {
+        //alert("roundToTwo(num) Function");
+        return +(Math.round(num + "e+2") + "e-2");
+
+      }
+      function e() {
+        try {
+          document.getElementById("valueshowed").value += document.getElementById("valueshow").value;
+          // alert("wow");
+          //document.getElementById("valueshow").value=eval(document.getElementById("valueshowed").value).toFixed(2); 
+
+          document.getElementById("valueshow").value = roundToTwo(eval(document.getElementById("valueshowed").value));
+          his[i] = document.getElementById("valueshowed").value + "=" + document.getElementById("valueshow").value;
+          i++;
+          //document.getElementById("his").innerHTML="";
+          //his.forEach(History);
+          flag = 0;
+          Historyy(his[i - 1]);
+          document.getElementById("valueshowed").value = "";
+          ch=false;
+          ch1=true;
+          //document.getElementById("valueshow").value="";
+        }
+        catch (e) {
+          c('Error')
+
+        }
+      }
+
+      function enterr() {
+
+        try {
+          document.getElementById("valueshowed").value += document.getElementById("valueshow").value;
+          // alert("wow");
+          document.getElementById("valueshow").value = roundToTwo(eval(document.getElementById("valueshowed").value).toFixed(2));
+          his[i] = document.getElementById("valueshowed").value + "=" + document.getElementById("valueshow").value;
+          i++;
+          //document.getElementById("his").innerHTML="";
+          //his.forEach(History);
+
+          flag = 0;
+          Historyy(his[i - 1]);
+          // document.getElementById("valueshow").value="";
+          document.getElementById("valueshowed").value = "";
+
+        }
+        catch (e) {
+          c('Error')
+
+        }
+      }
+      var flag = 0;
+      function Hiss() {
+
+        //document.getElementById("his").innerHTML="";
+        // alert("1");
+        //alert(his.length);
+        if (his.length < 1) {
+          //alert("if block");
+          //document.getElementById("memo1").visibility="visible";
+          //document.getElementById("memo").visibility="collapse";
+          var vvv = document.getElementsByClassName("hist1");
+          for (let i = 0; i < vvv.length; i++) {
+            vvv[i].innerHTML = '';
+          }
+          document.getElementById("memo").innerHTML = "<b style='font-size:20px;color:red;visibility:visible'>There is no history yet</b>";
+          document.getElementById("bin").style.visibility = "hidden";
+        }
+        else {
+          //  alert("else block");
+          //his.forEach(History);
+          Historyy("", flag);
+
+        }
+      }
+
+      function Historyy(item, l) {
+        document.getElementById("his").visibility = "hidden";
+        if (!his)
+          document.getElementsByClassName("hist1").style.visibility = "visible";
+        document.getElementById("memo").innerHTML = "";
+        document.getElementById("bin").style.visibility = "visible";
+        console.log("beforre1");
+        if (flag === 3) {
+
+         var temp = item.split('=');
+          critic = item;
+         // alert('here boss in the if block when flag===3');
+          //alert("Element");
+
+
+          console.log("before1");
+            document.getElementById("his").innerHTML += "<div class='hist1'  id='cc'   onclick='showw(this.id)'!important onmousedown='rightclckk(event,this.id)' style='color:grey;font-size:20px;text-align:right;letter-spacing:8px'>" + temp[0] + "=<br><span  class='hist0'  style='text-align:right;font-size:29px;color:black;letter-spacing:2px'>" + temp[1] + "</span></div>";
+            console.log("after1");
+
+
+
+           flag=0;
+            var list = document.getElementsByClassName("hist1");
+            for (var i = 0; i < list.length; i++) {
+              list[i].style.visibility = "visible";
+              if (i = list.length - 1) {
+                list[list.length - 1].setAttribute("id", i);
+
+                //list[i].addEventListener('click',rightclck, false);
+              }
+            }
+            //list[list.length-1].value=critic;
+            //document.getElementById("his").innerHTML +='<div class="hist1" onclick="show()" style='+'color:red;font-size:20px;text-align:right;letter-spacing:8px'+'>'+temp[0];
+            //document.getElementById("his").innerHTML +='<span  class="hist0" onclick="show(item)" style='+'text-align:right;font-size:29px'+'>'+temp[1]+'</span>'+'</div>'+'<br>';
+            document.getElementById("bin").style.visibility = "visible";
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+        else {
+          var temp = item.split('=');
+          critic = item;
+          //alert(temp);
+          //indexx=index;
+          if (temp == "" && flag == 0) {
+            //alert("if blockk");
+          }
+          else if (flag == 1) {
+
+            var list = document.getElementsByClassName("hist1");
+            for (var i = 0; i < list.length; i++)
+              list[i].style.visibility = "visible";
+            //  alert("called mamoii");
+            flag = 0;
+          }
+
+          else {
+            console.log("before");
+            document.getElementById("his").innerHTML += "<div class='hist1'  id='cc'   onclick='show(this.id)'!important onmousedown='rightclck(event,this.id)' style='color:grey;font-size:20px;text-align:right;letter-spacing:8px'>" + temp[0] + "=<br><span  class='hist0'  style='text-align:right;font-size:29px;color:black;letter-spacing:2px'>" + temp[1] + "</span></div>";
+            console.log("after");
+
+
+
+
+            var list = document.getElementsByClassName("hist1");
+            for (var i = 0; i < list.length; i++) {
+              list[i].style.visibility = "visible";
+              if (i = list.length - 1) {
+                list[list.length - 1].setAttribute("id", i);
+
+                //list[i].addEventListener('click',rightclck, false);
+              }
+            }
+            //list[list.length-1].value=critic;
+            //document.getElementById("his").innerHTML +='<div class="hist1" onclick="show()" style='+'color:red;font-size:20px;text-align:right;letter-spacing:8px'+'>'+temp[0];
+            //document.getElementById("his").innerHTML +='<span  class="hist0" onclick="show(item)" style='+'text-align:right;font-size:29px'+'>'+temp[1]+'</span>'+'</div>'+'<br>';
+            document.getElementById("bin").style.visibility = "visible";
+          }
+        }
+      
+      
+      
+      
+      
+      ch1=true;
+      ch=false;
+
+      
+      }
+
+
+      function History(item, index) {
+        console.log("beforre");
+        var temp = item.split('=');
+        critic = item;
+
+        indexx = index;
+        console.log("before");
+        document.getElementById("his").innerHTML += "<div class='hist1'  id='cc' title='click to view or right click to remove'  onclick='show(this.id)'!important onmousedown='rightclck(event,this.id)' style='color:grey;font-size:20px;text-align:right;letter-spacing:8px'>" + temp[0] + "=<br><span  class='hist0'  style='text-align:right;font-size:29px;color:black;letter-spacing:2px'>" + temp[1] + "</span></div>";
+        console.log("after");
+        var list = document.getElementsByClassName("hist1");
+        for (var i = 0; i < list.length; i++) {
+          if (i = list.length - 1) {
+            list[list.length - 1].setAttribute("id", i);
+
+            //list[i].addEventListener('click',rightclck, false);
+          }
+        }
+        //list[list.length-1].value=critic;
+        //document.getElementById("his").innerHTML +='<div class="hist1" onclick="show()" style='+'color:red;font-size:20px;text-align:right;letter-spacing:8px'+'>'+temp[0];
+        //document.getElementById("his").innerHTML +='<span  class="hist0" onclick="show(item)" style='+'text-align:right;font-size:29px'+'>'+temp[1]+'</span>'+'</div>'+'<br>';
+        document.getElementById("bin").style.visibility = "visible";
+
+      }
+      function rightclck(event, id) {
+        if (event.button == 2) {
+          var elem = document.getElementById(id);
+          elem.innerHTML = "";
+          document.getElementById("his").removeChild(elem);
+          //if(document.getElementById)
+
+          // alert("total elements in hist1"+':::'+document.getElementsByClassName("hist1").length);
+          if (document.getElementsByClassName("hist1").length == 0) {
+            allclear();
+          }
+          //elem.parentNode.removeChild(elem);
+        }
+        else{
+          show(id);
+        }
+      }
+      function rightclckk(event, id) {
+        if (event.button == 2) {
+          var elem = document.getElementById(id);
+          elem.innerHTML = "";
+          document.getElementById("his").removeChild(elem);
+          //if(document.getElementById)
+
+          // alert("total elements in hist1"+':::'+document.getElementsByClassName("hist1").length);
+          if (document.getElementsByClassName("hist1").length == 0) {
+            allclear();
+          }
+          //elem.parentNode.removeChild(elem);
+        }
+        else{
+          showw(id);
+        }
+      }
+      function show(id) {
+        // var k=item;
+        //var d=k;
+        //idd=id;
+        //alert(d);
+        //var temp=item.split('=');
+        //var d1=temp[1];
+        // var d0=temp[0];
+        // alert(idd);
+        //alert("we are in show(id) function right now");
+        //alert(parseInt(document.getElementById(id).innerHTML));
+        s = document.getElementById(id).innerHTML.split('=');
+        //alert(s[0]);
+        //alert(eval(s[0]));
+        //alert(parseInt(document.getElementById(id).value));
+        //  alert("checking1");
+        document.getElementById("valueshow").value = roundToTwo(eval(s[0]));    //d1;
+        // alert("checking1");
+        document.getElementById("valueshowed").value = s[0];      //d;
+      }
+      function showw(id) {
+        //alert('showw id');
+        // var k=item;
+        //var d=k;
+        //idd=id;
+        //alert(d);
+        //var temp=item.split('=');
+        //var d1=temp[1];
+        // var d0=temp[0];
+        // alert(idd);
+        //alert("we are in showw(id) function right now");
+        //alert(parseInt(document.getElementById(id).innerHTML));
+        s = document.getElementById(id).innerHTML.split('=');
+        s[3]=s[3].replace('text-align:right;font-size:29px;color:black;letter-spacing:2px'," ")
+        s[3]=s[3].replace('</span>'," ");
+        //alert((s[3]).substr(4));
+        //alert(s)
+        //alert(eval(s[0]));
+        //alert(parseInt(document.getElementById(id).value));
+        //  alert("checking1");
+        //document.getElementById("valueshow").value = roundToTwo(eval(s[0]));    //d1;
+        // alert("checking1");
+       // alert("just before the value showing");
+        document.getElementById("valueshowed").value = s[0];      //d;
+        document.getElementById("valueshow").value = new Number((s[3]).substr(4));
+      }
+
+      function Mem() {
+        document.getElementById("his").style.visibility = "visible";
+        document.getElementById("memo").innerHTML = "<b style=" + "font-size:20px;visiblity:visible" + ">There is nothing saved in Memory</b>";
+        //document.getElementsByClassName("").style.visibility="hidden";
+
+        var list = document.getElementsByClassName("hist1");
+        for (let i = 0; i < list.length; i++)
+          list[i].style.visibility = "hidden";
+        document.getElementById("memo").style.visibility = "visible";
+        document.getElementById("bin").style.visibility = "hidden";
+        // document.getElementsByClassName("hist1").visibility="collapse";
+        flag = 1;
+
+
+      }
+
+      function allclear() {
+        //document.getElementById("his").innerHTML="";
+        document.getElementsByClassName("hist1").value = "";
+        his.length = 0;
+        //alert("All clearr All clear");
+        Hiss();
+      }
+    </script>
+</body>
+
+</html>
