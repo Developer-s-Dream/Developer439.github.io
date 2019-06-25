@@ -1,0 +1,5 @@
+Disallow: www.runforjob.gq/
+Disallow: runforjob.gq/
+
+Allow: /
+Sitemap: https://www.runforjob.gq/sitemap.xml
