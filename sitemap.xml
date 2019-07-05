@@ -1,9 +1,6 @@
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-<url>
-<loc>https://www.runforjob.gq/</loc>
-<lastmod>2019-06-25</lastmod>
-<changefreq>daily</changefreq>
-<priority>1.0</priority>
-<xhtml:link rel="alternate" media="only screen and (max-width: 640px)" href="https://www.runforjob.gq/" />
-</url>
-</urlset>
+
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<sitemap>
+<loc>https://www.runforjob.gq/mainurlsitemap.xml</loc>
+</sitemap>
+</sitemapindex>
